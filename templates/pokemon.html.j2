@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <h1>Pick A Pokemon</h1>
+ <form action="/pokemon" method="POST">
+  <div class="mb-3">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" name = "name" class="form-control" id="name">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    {% if error %}
+        <small style="color:red;">{{error}}</small>
+    {% else %}
+        <small style="color:blue;">There was no error</small>
+    {% endif %}
+<!--table for pokemon data--> 
+    {% if data %}
+        <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Ability</th>
+        <th scope="col">Base Experience</th>
+        <th scope="col">Sprite URL</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in data%}
+    <tr>
+        <th scope="row">{{data['Name']}}</th>
+        <td>{{data['Ability']}}</td>
+        <td>{{data['Base Experience']}}</td>
+        <td>{{data['Sprite URL']}}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+    {% endif %}
+{% endblock %}
